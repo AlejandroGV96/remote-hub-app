@@ -1,1 +1,18 @@
-<web3-nx-welcome></web3-nx-welcome> <router-outlet></router-outlet>
+<agv-nav-bar
+    (createHotel)="createHotel()"
+    (addReservation)="goToAddReservation()"
+    (getAllReservations)="goToAllReservations()"
+    (getMyReservations)="goToMyReservations()"
+    (hotelAddressChange)="setHotelAddress($event)"
+    (removeHotelAddress)="removeHotelAddress()"
+    (withdraw)="withdraw()"
+    (connect)="connect()"
+    [isConnected]="isConnected()"
+    [hotelExists]="hotelExists()"
+    [address]="accounts()[0]"
+    [hotelBalance]="hotelBalance()"
+/>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+

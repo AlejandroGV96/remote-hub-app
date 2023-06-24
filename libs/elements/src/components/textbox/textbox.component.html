@@ -1,0 +1,23 @@
+<label *ngIf="label" for="textbox-input-id" class="label">{{ label }}</label>
+<input
+    #inputEl
+    id="textbox-input-id"
+    class="textbox-input"
+    [style]="customStyle"
+    [minLength]="42"
+    [maxLength]="42"
+    [value]="value"
+    [placeholder]="placeholder"
+    [type]="type"
+    [ngClass]="{
+        'textbox-input--disabled': !!disabled,
+        'textbox-input--invalid': !!invalid && touched,
+        'textbox-input--enabled': !disabled && !invalid
+    }"
+    [disabled]="disabled"
+    (input)="valueChange(inputEl.value)"
+/>
+<div class="textbox-error" *ngIf="invalid">
+    <ng-content></ng-content>
+</div>
+

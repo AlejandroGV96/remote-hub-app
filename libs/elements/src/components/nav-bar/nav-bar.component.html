@@ -1,0 +1,77 @@
+<nav>
+    <span class="logo" alt="RemoteHub Logo"></span>
+    <agv-primary-button
+        *ngIf="!hotelExists && isConnected"
+        [customStyle]="style"
+        (press)="createHotel.emit()"
+        name="Create Hotel"
+    />
+
+    <div style="display: flex; flex-direction: row" *ngIf="isConnected">
+        <agv-textbox
+            [invalid]="!hotelExists"
+            placeholder="Hotel Address..."
+            [customStyle]="style"
+            [(ngModel)]="hotelAddress"
+            #addressInput
+        ></agv-textbox>
+        <agv-primary-button
+            (press)="hotelAddressChange.emit(hotelAddress)"
+            [customStyle]="style"
+            name="+"
+            [disabled]="!hotelAddress || hotelAddress.length < 42"
+        />
+        <agv-primary-button
+            (press)="removeHotelAddress.emit()"
+            [customStyle]="style"
+            name="-"
+        />
+    </div>
+
+    <agv-primary-button
+        *ngIf="hotelExists && hotelBalance"
+        [customStyle]="style"
+        (press)="addReservation.emit()"
+        name="Add Reservation"
+    />
+
+    <agv-primary-button
+        *ngIf="hotelExists"
+        [customStyle]="style"
+        (press)="getAllReservations.emit()"
+        name="Get All Reservations"
+    />
+
+    <div style="flex-grow: 1"></div>
+
+    <ng-container *ngIf="!isConnected; else connected">
+        <agv-primary-button
+            [customStyle]="style"
+            (press)="connect.emit()"
+            name="Connect"
+        >
+            <span class="logo-metamask" alt="Metamask Logo"></span>
+        </agv-primary-button>
+    </ng-container>
+    <ng-template #connected>
+        <agv-textbox
+            [disabled]="true"
+            [customStyle]="style"
+            *ngIf="hotelBalance"
+            style="width: 200px"
+            [ngModel]="'Hotel balance: ' + hotelBalance + ' ETH'"
+        />
+        <agv-primary-button
+            (press)="withdraw.emit()"
+            *ngIf="hotelBalance"
+            [customStyle]="style"
+            name="withdraw"
+        />
+        <agv-primary-button
+            [disabled]="true"
+            [customStyle]="style"
+            [name]="'Connected: ' + simpleAddress"
+        />
+    </ng-template>
+</nav>
+

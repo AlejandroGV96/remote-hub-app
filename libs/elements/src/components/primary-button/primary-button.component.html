@@ -1,0 +1,12 @@
+<button
+    class="primary-button"
+    [style]="customStyle"
+    [disabled]="disabled"
+    (click)="buttonPressed(); $event.preventDefault()"
+>
+    <span class="primary-button__name">
+        {{ name }}
+    </span>
+    <ng-content></ng-content>
+</button>
+

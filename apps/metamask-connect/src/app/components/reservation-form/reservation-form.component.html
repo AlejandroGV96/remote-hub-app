@@ -1,0 +1,26 @@
+<form class="form" [formGroup]="reservationForm">
+    <div class="form__row">
+        <agv-textbox formControlName="price" label="Price" type="number" />
+        <agv-textbox
+            formControlName="roomNumber"
+            label="Room Number"
+            type="number"
+        />
+    </div>
+    <div class="form__row">
+        <agv-textbox
+            formControlName="startDate"
+            label="Start Date"
+            type="date"
+        />
+        <agv-textbox formControlName="endDate" label="End Date" type="date" />
+    </div>
+
+    <agv-primary-button
+        class="form__button"
+        type="button"
+        (press)="onSubmit()"
+        [name]="'submit'"
+    />
+</form>
+

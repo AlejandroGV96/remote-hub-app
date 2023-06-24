@@ -1,0 +1,73 @@
+<div class="reservations">
+    <div
+        class="reservations__instance"
+        *ngFor="let reservation of reservations"
+    >
+        <span>Status: {{ stauses[reservation.status] }}</span>
+        <span>Owner: {{ addressOwner(reservation.guestAddress) }}</span>
+        <span>Price: {{ reservation.price }}</span>
+        <span>Room: {{ reservation.roomNumber }}</span>
+        <span>Start date: {{ reservation.startDate | date }}</span>
+        <span>End date: {{ reservation.endDate | date }} </span>
+        <agv-primary-button
+            [customStyle]="style"
+            *ngIf="
+                reservation.status.toString() === '0' &&
+                reservation.guestAddress.toLowerCase() !==
+                    currentAccount.toLowerCase()
+            "
+            (press)="reservationClicked.emit(reservation)"
+            name="Reserve"
+        />
+        <agv-primary-button
+            [customStyle]="style"
+            *ngIf="
+                reservation.guestAddress.toLowerCase() ===
+                    currentAccount.toLowerCase() &&
+                reservation.status.toString() === '1'
+            "
+            (press)="this.confirmReservation.emit(reservation)"
+            name="Confirm"
+        />
+        <agv-primary-button
+            [customStyle]="style"
+            *ngIf="
+                reservation.guestAddress.toLowerCase() ===
+                    currentAccount.toLowerCase() &&
+                reservation.status.toString() === '0'
+            "
+            (press)="this.reclaimReservation.emit(reservation)"
+            name="Reclaim"
+        />
+        <agv-secondary-button
+            [customStyle]="style"
+            *ngIf="
+                reservation.guestAddress.toLowerCase() ===
+                    currentAccount.toLowerCase() &&
+                reservation.status.toString() === '1'
+            "
+            (press)="this.resignReservation.emit(reservation)"
+            name="Resign"
+        />
+        <agv-primary-button
+            [customStyle]="style"
+            *ngIf="
+                hotelAddress.toLowerCase() === currentAccount.toLowerCase() &&
+                reservation.status.toString() === '2'
+            "
+            (press)="this.consolidateReservation.emit(reservation)"
+            name="Consolidate"
+        />
+        <agv-secondary-button
+            [customStyle]="style"
+            *ngIf="
+                hotelAddress.toLowerCase() === currentAccount.toLowerCase() &&
+                (hotelOrNoOwner(reservation.guestAddress) ||
+                    reservation.status.toString() === '3')
+            "
+            (press)="this.removeReservation.emit(reservation)"
+            name="Remove"
+        />
+    </div>
+</div>
+

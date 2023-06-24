@@ -1,0 +1,17 @@
+<ng-container *ngIf="allReservations().length > 0; else noReservations">
+    <web3-reservation-list
+        [hotelAddress]="hotelAddress()"
+        [currentAccount]="currentAccount()[0]"
+        [reservations]="allReservations()"
+        (reservationClicked)="reservationClicked($event)"
+        (confirmReservation)="confirmReservation($event)"
+        (consolidateReservation)="consolidateReservation($event)"
+        (reclaimReservation)="reclaimReservation($event)"
+        (resignReservation)="resignReservation($event)"
+        (removeReservation)="removeReservation($event)"
+    />
+</ng-container>
+<ng-template #noReservations>
+    <p>No reservations found</p>
+</ng-template>
+

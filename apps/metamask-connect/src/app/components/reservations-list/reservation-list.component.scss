@@ -1,0 +1,20 @@
+.reservations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+
+    &__instance {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        border: 2px solid #000000;
+        background-color: white;
+    }
+}
+
