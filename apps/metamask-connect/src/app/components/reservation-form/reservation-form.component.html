@@ -1,6 +1,10 @@
 <form class="form" [formGroup]="reservationForm">
     <div class="form__row">
-        <agv-textbox formControlName="price" label="Price" type="number" />
+        <agv-textbox
+            formControlName="price"
+            label="Price (USD)"
+            type="number"
+        />
         <agv-textbox
             formControlName="roomNumber"
             label="Room Number"

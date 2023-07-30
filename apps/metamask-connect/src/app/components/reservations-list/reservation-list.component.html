@@ -5,7 +5,7 @@
     >
         <span>Status: {{ stauses[reservation.status] }}</span>
         <span>Owner: {{ addressOwner(reservation.guestAddress) }}</span>
-        <span>Price: {{ reservation.price }}</span>
+        <span>Price: {{ reservation.price }}$</span>
         <span>Room: {{ reservation.roomNumber }}</span>
         <span>Start date: {{ reservation.startDate | date }}</span>
         <span>End date: {{ reservation.endDate | date }} </span>
